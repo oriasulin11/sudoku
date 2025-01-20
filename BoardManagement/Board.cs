@@ -31,5 +31,11 @@ namespace Sudoku.Board
             }
 
         }
+
+        //Returns a the set from a specified cell
+        public ISet<int> GetCell(int row, int col) => _board[row, col];
+
+        //Returns if a cell is in the board
+        public bool InBoard(int row, int col) => row >= 0 && row < _dimensions && col >= 0 && col < _dimensions;
     }
 }
