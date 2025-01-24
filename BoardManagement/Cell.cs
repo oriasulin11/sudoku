@@ -8,12 +8,12 @@ namespace Sudoku.BoardManagement
 {
     internal class Cell
     {
-        public ISet<int> _possibleValues { get; }
+        public ISet<int> PossibleValues { get; }
         public int FinalValue { get; set; } 
 
         public Cell(int dimensions)
         {
-            _possibleValues = new HashSet<int>(Enumerable.Range(1, dimensions));
+            PossibleValues = new HashSet<int>(Enumerable.Range(1, dimensions));
         }
     }
 }

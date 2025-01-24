@@ -39,7 +39,7 @@ namespace Sudoku.BoardManagement
                         Cell cell = board.GetCell(row, column);
 
                         cell.FinalValue = number;
-                        cell._possibleValues.Clear();
+                        cell.PossibleValues.Clear();
 
                         // Eliminating the number from neighbors possible values.
                         NeighborsUpdater.UpdateNeighbors(board, row, column, number);
