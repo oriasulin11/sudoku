@@ -26,9 +26,9 @@ namespace Sudoku.UI
                 {
                     // Print box vertical outline 
                     if (column % boxSize == 0)
-                        Console.Write("  |  ");
+                        Console.Write(" | ");
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(board.GetCell(row, column).FinalValue);
+                    Console.Write($"{board.GetCell(row, column).FinalValue} ");
                     Console.ResetColor();
                 }
                 //Move down for a new row
