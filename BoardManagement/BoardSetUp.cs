@@ -31,7 +31,7 @@ namespace Sudoku.BoardManagement
             {
                 for(int column = 0; column < board.Dimensions; column++)
                 {
-                    number = sudokuString[stringIndex];
+                    number = sudokuString[stringIndex] - '0';
                     // Checking for non empty cells
                     if (number != 0)
                     {
@@ -45,6 +45,7 @@ namespace Sudoku.BoardManagement
                         NeighborsUpdater.UpdateNeighbors(board, row, column, number);
 
                     }
+                    stringIndex++;
                 }
 
             }

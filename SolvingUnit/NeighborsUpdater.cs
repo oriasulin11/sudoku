@@ -12,7 +12,9 @@ namespace Sudoku.SolvingUnit
     {
         public static void UpdateNeighbors(Board board, int row, int column, int value)
         {
-            
+            UpdateRow(board, row, column, value);
+            UpdateColumn(board, row, column, value);
+            UpdateBox(board, row, column, value);
         }
         /// <summary>
         /// Iterate over the row and remove the number given from

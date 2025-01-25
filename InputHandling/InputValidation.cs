@@ -2,7 +2,7 @@
 
 namespace Sudoku.InputHandling
 {
-    public class InputValidation
+    public static class InputValidation
     {
         /* 
         This class validates the given sudoku input.
