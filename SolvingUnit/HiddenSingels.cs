@@ -28,6 +28,8 @@ namespace Sudoku.SolvingUnit
 
                         cell.FinalValue = cell.PossibleValues.First();
                         cell.PossibleValues.Clear();
+                        //Updating the neighboring cells
+                        NeighborsUpdater.UpdateNeighbors(board, row,column,cell.FinalValue);
 
                         LocateHiddenSingels(board);
                     }
