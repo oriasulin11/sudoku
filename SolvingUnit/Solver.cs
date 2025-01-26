@@ -17,30 +17,35 @@ namespace Sudoku.SolvingUnit
     /// </summary>
     internal static class Solver
     {
-        public static bool Solve(Board board, int row , int column)
+        public static bool Solve(Board board, int row, int column)
         {
             // Checking if we reached the end of the board
             if (row == board.Dimensions)
                 return true;
             // Checking if we reached the end of a row
-            if(column == board.Dimensions)
-                return Solve(board, row+1,0);
+            if (column == board.Dimensions)
+                return Solve(board, row + 1, 0);
+
             Cell cell = board.GetCell(row, column);
             // If the cell is already solved, move to the next one
             if (cell.FinalValue != 0)
-                return Solve(board, row, column+1);
+                return Solve(board, row, column + 1);
             HiddenSingels.LocateHiddenSingels(board);
 
             //Check if the heuristic found the missing value
-            if(cell.FinalValue != 0)
+            if (cell.FinalValue != 0)
                 return Solve(board, row, column + 1);
-
-            foreach (var number in cell.PossibleValues)
+            foreach (var number in cell.PossibleValues.ToList())
             {
+
+                Board oldBoard = (Board)board.Clone();
+
                 cell.FinalValue = number;
+                cell.PossibleValues.Clear();
+                NeighborsUpdater.UpdateNeighbors(board, row, column, number);
                 if (Solve(board, row, column + 1))
                     return true;
-                cell.FinalValue = 0;
+                Board.CopyBoard(board, oldBoard);
             }
             return false;
 
