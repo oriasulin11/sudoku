@@ -8,7 +8,7 @@ namespace Sudoku.BoardManagement
 {
     internal class Cell
     {
-        public ISet<int> PossibleValues { get; }
+        public ISet<int> PossibleValues { get; set; }
         public int FinalValue { get; set; } 
 
         public Cell(int dimensions)
