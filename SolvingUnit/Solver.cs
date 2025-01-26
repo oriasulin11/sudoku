@@ -30,7 +30,7 @@ namespace Sudoku.SolvingUnit
             // If the cell is already solved, move to the next one
             if (cell.FinalValue != 0)
                 return Solve(board, row, column + 1);
-            HiddenSingels.LocateHiddenSingels(board);
+            NakedSingels.LocateNakedSingels(board);
 
             //Check if the heuristic found the missing value
             if (cell.FinalValue != 0)

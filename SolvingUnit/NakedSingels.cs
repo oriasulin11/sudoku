@@ -13,9 +13,9 @@ namespace Sudoku.SolvingUnit
     /// with only one possible number. if such cell exists,
     /// we update it, and do another iteration.
     /// </summary>
-    internal static class HiddenSingels
+    internal static class NakedSingels
     {
-        public static void LocateHiddenSingels(Board board)
+        public static void LocateNakedSingels(Board board)
         {
             for (int row = 0; row < board.Dimensions; row++)
             {
@@ -31,7 +31,7 @@ namespace Sudoku.SolvingUnit
                         //Updating the neighboring cells
                         NeighborsUpdater.UpdateNeighbors(board, row,column,cell.FinalValue);
 
-                        LocateHiddenSingels(board);
+                        LocateNakedSingels(board);
                     }
                 }
             }
