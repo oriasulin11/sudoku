@@ -1,4 +1,5 @@
 ﻿using Sudoku.BoardManagement;
+using Sudoku.InputHandling;
 using Sudoku.SolvingUnit;
 using Sudoku.UI;
 using System;
@@ -12,9 +13,10 @@ namespace Sudoku
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
+            string sudokuBoard = ProcessInputFronUser.TakeInputFromUser();
             Board board = new Board(9);
             BoardSetUp.InitilaizeBoard(board,
-                "010006200080900457729000600100040030000703000040060009002000915678009020001300060");
+                "000006000059000008200008000045000000003000000006003054000325006000000000000000000");
             if (Solver.Solve(board, 0, 0))
                 ShowSudoku.PrintSudoku(board);
             else

@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\IllegalCharactersException.cs" />
     <Compile Include="Exceptions\InvalidSudokuLengthException.cs" />
     <Compile Include="InputHandling\InputValidation.cs" />
+    <Compile Include="InputHandling\ProcessInputFronUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolvingUnit\HiddenSingel.cs" />
