@@ -13,10 +13,11 @@ namespace Sudoku
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
+
             string sudokuBoard = ProcessInputFronUser.TakeInputFromUser();
-            Board board = new Board(9);
-            BoardSetUp.InitilaizeBoard(board,
-                "000006000059000008200008000045000000003000000006003054000325006000000000000000000");
+            InputValidation.ValidateInput(sudokuBoard);
+            Board board = new Board(ProcessInputFronUser.GetSudokuDimentions(sudokuBoard));
+            BoardSetUp.InitilaizeBoard(board,sudokuBoard);
             if (Solver.Solve(board, 0, 0))
                 ShowSudoku.PrintSudoku(board);
             else

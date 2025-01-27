@@ -28,5 +28,10 @@ namespace Sudoku.InputHandling
 
             return String.Empty;
         }
+        /// <summary>
+        /// returns dimentions of the sudoku
+        /// </summary>
+        /// <param name="rawInput"></param>
+        public static int GetSudokuDimentions(string rawInput) => (int)Math.Sqrt(rawInput.Length);
     }
 }
