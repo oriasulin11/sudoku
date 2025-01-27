@@ -30,6 +30,7 @@ namespace Sudoku.SolvingUnit
             // If the cell is already solved, move to the next one
             if (cell.FinalValue != 0)
                 return Solve(board, row, column + 1);
+
             HiddenSingel.SolveForHiddenSingles(board);
             NakedSingels.LocateNakedSingels(board);
 
