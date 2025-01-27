@@ -13,7 +13,7 @@ namespace Sudoku.InputHandling
         /// <param name="rawInput"></param>
         public static void ValidateInput(string rawInput)
         {
-            int dimentions = ProcessInputFronUser.GetSudokuDimentions(rawInput);
+            int dimentions = ProcessInputFromConsole.GetSudokuDimentions(rawInput);
             CheckForIllegalLenght(rawInput);
             CheckForIllegalCharacters(rawInput, dimentions);
             
@@ -21,7 +21,7 @@ namespace Sudoku.InputHandling
        
         private static void CheckForIllegalLenght(string rawInput)
         {
-            int dimentions = ProcessInputFronUser.GetSudokuDimentions(rawInput);
+            int dimentions = ProcessInputFromConsole.GetSudokuDimentions(rawInput);
             // Dimention is NOT a perfect square
             if (Math.Sqrt(rawInput.Length) != dimentions)
                 throw new InvalidSudokuLengthException($"Invalid input length");

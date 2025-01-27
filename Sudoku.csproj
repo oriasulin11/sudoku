@@ -49,13 +49,14 @@
     <Compile Include="Exceptions\IllegalCharactersException.cs" />
     <Compile Include="Exceptions\InvalidSudokuLengthException.cs" />
     <Compile Include="InputHandling\InputValidation.cs" />
-    <Compile Include="InputHandling\ProcessInputFronUser.cs" />
+    <Compile Include="InputHandling\ProcessInputFromConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolvingUnit\HiddenSingel.cs" />
     <Compile Include="SolvingUnit\NakedSingels.cs" />
     <Compile Include="SolvingUnit\NeighborsUpdater.cs" />
     <Compile Include="SolvingUnit\Solver.cs" />
+    <Compile Include="UI\Menu.cs" />
     <Compile Include="UI\ShowSudoku.cs" />
   </ItemGroup>
   <ItemGroup>

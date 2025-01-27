@@ -11,11 +11,10 @@ namespace Sudoku.InputHandling
     /// This class will read input from the user
     /// directly.
     /// </summary>
-    internal class ProcessInputFronUser
+    internal class ProcessInputFromConsole
     {
         public static string TakeInputFromUser()
         {
-            Console.WriteLine("Enter Sudoku:\n");
             try
             {
                 string sudokuBoard = Console.ReadLine();
