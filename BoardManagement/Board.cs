@@ -14,13 +14,14 @@ namespace Sudoku.BoardManagement
     /// </summary>
     internal class Board : ICloneable
     {
-        
+        public int BoxSize { get; } 
         public int Dimensions { get; }
         private readonly Cell[,] _board;
 
         public Board(int dimensions)
         {
             Dimensions= dimensions;
+            BoxSize = (int)Math.Sqrt(dimensions);
             _board = new Cell[dimensions, dimensions];
 
             //initiating each cell

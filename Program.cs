@@ -14,7 +14,7 @@ namespace Sudoku
             stopWatch.Start();
             Board board = new Board(9);
             BoardSetUp.InitilaizeBoard(board,
-                "060010030830605029000000000006030900092000570000409000285000716000000000470000095");
+                "000100309002040000003007806500003000020000010000900008405200600000030900301008000");
             if (Solver.Solve(board, 0, 0))
                 ShowSudoku.PrintSudoku(board);
             else
