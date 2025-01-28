@@ -24,7 +24,7 @@ namespace Sudoku.UI
                 Console.WriteLine("Enter Sudoku");
                 string sudokuBoard = ProcessInputFromConsole.TakeInputFromUser();
                 Program.SolveWithUsersInput(sudokuBoard);
-                ShowMenu();
+               
             }
             // Take input from file
             if(usersChoise.Equals("2"))
