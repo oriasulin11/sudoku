@@ -1,4 +1,5 @@
 ﻿
+using Sudoku.UI;
 using System;
 using System.Collections.Generic;
 
@@ -29,7 +30,7 @@ namespace Sudoku.BoardManagement
             {
                 for (int column = 0; column < dimensions; column++)
                 {
-                    _board[row, column] = new Cell(Dimensions);
+                    _board[row, column] = new Cell(Dimensions, row, column);
                 }
             }
 
@@ -41,6 +42,50 @@ namespace Sudoku.BoardManagement
         //Returns if a cell is in the board
         public bool InBoard(int row, int col) => row >= 0 && row < Dimensions && col >= 0 && col < Dimensions;
 
+        /// <summary>
+        /// This function iterates over the board
+        /// and checks if the board is solved
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSolved()
+        {
+            for (int row = 0; row < Dimensions; row++)
+            {
+                for (int columns = 0; columns < Dimensions; columns++)
+                {
+                    if(GetCell(row, columns).FinalValue == 0)
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// This function iterates over each cell in the board,
+        /// and returns the cell with the least amount of possible
+        /// values
+        /// </summary>
+        public Cell GetCellWithLeastProbabilities()
+        {
+            Cell minCell = null;
+            int minCount = Dimensions-1;// The max number of possible values
+            Cell currentCell;
+            for (int rows = 0; rows < Dimensions; rows++)
+            {
+                //ShowSudoku.PrintSudoku(this);
+                for (int columns = 0; columns < Dimensions; columns++)
+                {
+                    currentCell = GetCell(rows, columns);
+                    // Check for unsoled cells
+                    if(currentCell.FinalValue == 0 && currentCell.PossibleValues.Count < minCount)
+                    {
+                        minCell = GetCell(rows, columns);
+                        minCount= minCell.PossibleValues.Count;
+                    }
+                }
+            }
+            return minCell;
+        }
         /// <summary>
         /// This function creates a deep clone of the board
         /// </summary>

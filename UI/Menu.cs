@@ -12,6 +12,8 @@ namespace Sudoku.UI
     internal class Menu
     {
         public static void ShowMenu() {
+            int solvedCount = 0;
+
             Console.WriteLine("Enter 1 to take sudoku board from console.");
             Console.WriteLine("Enter 2 to take sudoku board from file");
             Console.WriteLine("Enter 3 to exit");
@@ -42,7 +44,8 @@ namespace Sudoku.UI
                         // the file is reached.
                         while ((sudokuBoard = streamReader.ReadLine()) != null)
                         {
-                            Program.SolveWithUsersInput(sudokuBoard);
+                            Program.SolveWithUsersInput(sudokuBoard.Trim());
+                            solvedCount++;
                         }
                     }
                 }
@@ -52,6 +55,7 @@ namespace Sudoku.UI
                 }
                 finally
                 {
+                    Console.WriteLine($"Solved {solvedCount} puzzels");
                     ShowMenu();
                 }
             }

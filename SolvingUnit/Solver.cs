@@ -1,4 +1,5 @@
 ﻿using Sudoku.BoardManagement;
+using Sudoku.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,45 +18,41 @@ namespace Sudoku.SolvingUnit
     /// </summary>
     internal static class Solver
     {
-        public static bool Solve(Board board, int row, int column)
+        public static void ApplyHeuristic(Board board)
         {
-            // Checking if we reached the end of the board
-            if (row == board.Dimensions)
-                return true;
-            // Checking if we reached the end of a row
-            if (column == board.Dimensions)
-                return Solve(board, row + 1, 0);
-
-            Cell cell = board.GetCell(row, column);
-            // If the cell is already solved, move to the next one
-            if (cell.FinalValue != 0)
-                return Solve(board, row, column + 1);
 
             HiddenSingel.SolveForHiddenSingles(board);
             NakedSingels.LocateNakedSingels(board);
+        }
+        public static bool Solve(Board board)
+        {   
 
-            //Check if the heuristic found the missing value
-            if (cell.FinalValue != 0)
-                return Solve(board, row, column + 1);
+            // Apply the heuristics
+            ApplyHeuristic(board);
+
+            Cell cell = board.GetCellWithLeastProbabilities();
+
+            // Coudn't find an unsolved cell
+            if (cell == null)
+                return true;
+
+            // Found an unsolved cell with no possible candidates 
+            if (cell.PossibleValues.Count == 0)              
+                return false;
+
+            
             foreach (var number in cell.PossibleValues.ToList())
             {
 
                 Board oldBoard = (Board)board.Clone();
-
                 cell.FinalValue = number;
                 cell.PossibleValues.Clear();
-                NeighborsUpdater.UpdateNeighbors(board, row, column, number);
-                if (Solve(board, row, column + 1))
+                NeighborsUpdater.UpdateNeighbors(board, cell.Row, cell.Column, number);
+                if (Solve(board))
                     return true;
                 Board.CopyBoard(board, oldBoard);
             }
             return false;
-
-
-
-
-
-
 
         }
     }

@@ -10,9 +10,11 @@ namespace Sudoku
 {
     internal class Program
     {
+        private static Stopwatch stopWatch = new Stopwatch();
+
         public static void SolveWithUsersInput(String usersInput)
         {
-            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             stopWatch.Start();
             // Validate users input
             InputValidation.ValidateInput(usersInput);
@@ -21,16 +23,22 @@ namespace Sudoku
             Board board = new Board(ProcessInputFromConsole.GetSudokuDimentions(usersInput));
             BoardSetUp.InitilaizeBoard(board, usersInput);
 
-            if (Solver.Solve(board, 0, 0))
+            
+            if (Solver.Solve(board))
             {
                 stopWatch.Stop();
                 ShowSudoku.PrintSudoku(board);
             }
             else
+            {
+                stopWatch.Stop();
                 Console.WriteLine("Sorry, this one is unsolvable");
+
+            }
             //Print Runtime
             TimeSpan ts = stopWatch.Elapsed;
-            Console.WriteLine("RunTime in millisecods: " + ts.Milliseconds);
+            Console.WriteLine("RunTime in millisecods: " + ts.TotalMilliseconds);
+            stopWatch.Reset();
 
 
         }
