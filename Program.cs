@@ -4,6 +4,7 @@ using Sudoku.SolvingUnit;
 using Sudoku.UI;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq.Expressions;
 
 namespace Sudoku
@@ -27,6 +28,13 @@ namespace Sudoku
             if (Solver.Solve(board))
             {
                 stopWatch.Stop();
+                string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                // Print solution to file
+                using(StreamWriter writer = new StreamWriter(Path.Combine(docPath, "OutputFile.txt"), append:true))
+                {
+                    writer.WriteLine(board.ToString());
+                }
+                // Show sudoku to console
                 ShowSudoku.PrintSudoku(board);
             }
             else
@@ -39,8 +47,22 @@ namespace Sudoku
             TimeSpan ts = stopWatch.Elapsed;
             Console.WriteLine("RunTime in millisecods: " + ts.TotalMilliseconds);
             stopWatch.Reset();
+        }
+        public static void SolveFromFile(String fileName)
+        {
+            int solvedCount = 0;
+            using (StreamReader streamReader = new StreamReader(fileName))
+            {
+                string sudokuBoard;
 
-
+                // Read and solve boards from the file until the end of
+                // the file is reached.
+                while ((sudokuBoard = streamReader.ReadLine()) != null)
+                {
+                    Program.SolveWithUsersInput(sudokuBoard.Trim());
+                    solvedCount++;
+                }
+            }
         }
         static void Main(string[] args)
         {

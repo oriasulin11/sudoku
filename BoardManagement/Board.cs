@@ -132,5 +132,21 @@ namespace Sudoku.BoardManagement
                 }
             }
         }
+        /// <summary>
+        /// This function will return a string representation
+        /// of the board
+        /// </summary>
+        public override string ToString()
+        {
+            string output = "";
+            for (int rows = 0; rows < Dimensions; rows++)
+            {
+                for (int columns = 0; columns < Dimensions; columns++)
+                {
+                    output += GetCell(rows, columns).FinalValue;
+                }
+            }
+            return output;
+        }
     }
 }

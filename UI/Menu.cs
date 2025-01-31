@@ -11,13 +11,15 @@ namespace Sudoku.UI
 {
     internal class Menu
     {
-        public static void ShowMenu() {
-            int solvedCount = 0;
-
+        public static void ShowOptions()
+        {
             Console.WriteLine("Enter 1 to take sudoku board from console.");
             Console.WriteLine("Enter 2 to take sudoku board from file");
             Console.WriteLine("Enter 3 to exit");
+        }
+        public static void ShowMenu() {
 
+            ShowOptions();
 
             string usersChoise = ProcessInputFromConsole.TakeInputFromUser();
             //Take input from console
@@ -36,26 +38,11 @@ namespace Sudoku.UI
                     Console.WriteLine("Please enter file's path");
                     string inputFile = ProcessInputFromConsole.TakeInputFromUser();
 
-                    using (StreamReader streamReader = new StreamReader(inputFile))
-                    {
-                        string sudokuBoard;
-
-                        // Read and solve boards from the file until the end of
-                        // the file is reached.
-                        while ((sudokuBoard = streamReader.ReadLine()) != null)
-                        {
-                            Program.SolveWithUsersInput(sudokuBoard.Trim());
-                            solvedCount++;
-                        }
-                    }
+                    Program.SolveFromFile(inputFile);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    Console.WriteLine($"Solved {solvedCount} puzzels");
                     ShowMenu();
                 }
             }
