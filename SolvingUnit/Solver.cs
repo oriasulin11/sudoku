@@ -20,15 +20,23 @@ namespace Sudoku.SolvingUnit
     {
         public static void ApplyHeuristic(Board board)
         {
-
-            HiddenSingel.SolveForHiddenSingles(board);
             NakedSingels.LocateNakedSingels(board);
+            HiddenSingel.SolveForHiddenSingles(board);
         }
         public static bool Solve(Board board)
-        {   
-
-            // Apply the heuristics
-            ApplyHeuristic(board);
+        {
+            try
+            {
+                // Apply the heuristics
+                ApplyHeuristic(board);
+            }
+            catch (Exception ex)
+            {
+                // Heuistic found an error with the given board
+                return false;
+                
+            }
+           
 
             Cell cell = board.GetCellWithLeastProbabilities();
 

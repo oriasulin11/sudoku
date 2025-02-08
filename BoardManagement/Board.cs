@@ -1,4 +1,5 @@
 ﻿
+using Sudoku.SolvingUnit;
 using Sudoku.UI;
 using System;
 using System.Collections.Generic;
@@ -42,24 +43,22 @@ namespace Sudoku.BoardManagement
         //Returns if a cell is in the board
         public bool InBoard(int row, int col) => row >= 0 && row < Dimensions && col >= 0 && col < Dimensions;
 
-        /// <summary>
-        /// This function iterates over the board
-        /// and checks if the board is solved
-        /// </summary>
-        /// <returns></returns>
-        public bool IsSolved()
+        public Cell GetCellInUnit(UnitType unitType, int unitIndex, int positionInUnit)
         {
-            for (int row = 0; row < Dimensions; row++)
+            switch (unitType)
             {
-                for (int columns = 0; columns < Dimensions; columns++)
-                {
-                    if(GetCell(row, columns).FinalValue == 0)
-                        return false;
-                }
+                case UnitType.Row:
+                    return GetCell(unitIndex, positionInUnit);
+                case UnitType.Column:
+                    return GetCell(positionInUnit, unitIndex);
+                case UnitType.Box:
+                    int startRow = (unitIndex / BoxSize) * BoxSize;
+                    int startCol = (unitIndex % BoxSize) * BoxSize;
+                    return GetCell(startRow + (positionInUnit / BoxSize), startCol + (positionInUnit % BoxSize));
+                default:
+                    return null;
             }
-            return true;
         }
-
         /// <summary>
         /// This function iterates over each cell in the board,
         /// and returns the cell with the least amount of possible
