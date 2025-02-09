@@ -17,13 +17,22 @@ namespace Sudoku.SolvingUnit
             UpdateBox(board, row, column, value);
         }
         /// <summary>
+        /// This method remove the values given from the possible values
+        /// set in each cell of the unit
+        /// </summary>
+        /// <param name="unit"> row col or box</param>
+        /// <param name="values"></param>
+        public static void UpdateNeighborsFromUnit(List<Cell> unit, ISet<int> values)
+        {
+            foreach (var cell in unit)
+            {
+                cell.PossibleValues.ExceptWith(values);
+            }
+        }
+        /// <summary>
         /// Iterate over the row and remove the number given from
         /// the possible values in the cell 
         /// </summary>
-        /// <param name="board"></param>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
-        /// <param name="value"></param>
         public static void UpdateRow(Board board, int row, int column, int value)
         {
             for (int index = 0; index < board.Dimensions; index++)
@@ -38,10 +47,6 @@ namespace Sudoku.SolvingUnit
         ///  Iterate over the column and remove the number given from
         ///  the possible values in the cell
         /// </summary>
-        /// <param name="board"></param>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
-        /// <param name="value"></param>
         public static void UpdateColumn(Board board, int row, int column, int value)
         {
             for (int index = 0; index < board.Dimensions; index++)
@@ -56,10 +61,6 @@ namespace Sudoku.SolvingUnit
         ///  Iterate over the box and remove the number given from
         ///  the possible values in the cell
         /// </summary>
-        /// <param name="board"></param>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
-        /// <param name="value"></param>
         public static void UpdateBox(Board board, int row, int column, int value)
         {
             int sqrtOfDimension = (int)Math.Sqrt(board.Dimensions);

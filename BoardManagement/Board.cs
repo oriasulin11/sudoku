@@ -36,12 +36,17 @@ namespace Sudoku.BoardManagement
             }
 
         }
-
+        public List<Cell> GetCellsInUnit(UnitType unitType, int unitIndex)
+        {
+            List<Cell> cells = new List<Cell>();
+            for (int pos = 0; pos < Dimensions; pos++)
+            {
+                cells.Add(GetCellInUnit(unitType, unitIndex, pos));
+            }
+            return cells;
+        }
         //Returns a the set from a specified cell
         public Cell GetCell(int row, int col) => _board[row, col];
-
-        //Returns if a cell is in the board
-        public bool InBoard(int row, int col) => row >= 0 && row < Dimensions && col >= 0 && col < Dimensions;
 
         public Cell GetCellInUnit(UnitType unitType, int unitIndex, int positionInUnit)
         {
@@ -67,7 +72,7 @@ namespace Sudoku.BoardManagement
         public Cell GetCellWithLeastProbabilities()
         {
             Cell minCell = null;
-            int minCount = Dimensions-1;// The max number of possible values
+            int minCount = Dimensions+1;// The max number of possible values
             Cell currentCell;
             for (int rows = 0; rows < Dimensions; rows++)
             {
@@ -88,7 +93,6 @@ namespace Sudoku.BoardManagement
         /// <summary>
         /// This function creates a deep clone of the board
         /// </summary>
-        /// <returns></returns>
         public Object Clone()
         {
             Board newBoard = new Board(Dimensions);
@@ -110,8 +114,6 @@ namespace Sudoku.BoardManagement
         /// This function takes 2 boards and copys the contents of
         /// the backup board to the current one.
         /// </summary>
-        /// <param name="currentBoard"></param>
-        /// <param name="backupBoard"></param>
         public static void CopyBoard(Board currentBoard, Board backupBoard)
         {
             // Restore each cell's state from the backup board

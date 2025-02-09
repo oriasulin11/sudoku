@@ -16,12 +16,12 @@ namespace Sudoku.UI
        
         public static void PrintSudoku(Board board)
         {
-            
+            int value;
             for (int row = 0; row < board.Dimensions; row++)
             {
                 // Prints Box horizontal outline
                 if (row % board.BoxSize == 0)
-                    Console.WriteLine(new String('-', board.Dimensions * board.BoxSize));
+                    Console.WriteLine(new String('-', board.Dimensions * 2+ board.BoxSize * 2  -1));
 
                 for (int column = 0; column < board.Dimensions; column++)
                 {
@@ -29,7 +29,15 @@ namespace Sudoku.UI
                     if (column % board.BoxSize == 0)
                         Console.Write(" | ");
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write($"{board.GetCell(row, column).FinalValue} ");
+                    value = board.GetCell(row, column).FinalValue;
+                    // Print extra whitespace for single digit numbers
+                    if (value < 10)
+                    {
+                        Console.Write($"{board.GetCell(row, column).FinalValue}  ");
+                    }
+                    else
+                        Console.Write($"{board.GetCell(row, column).FinalValue} ");
+
                     Console.ResetColor();
                 }
                 //Move down for a new row

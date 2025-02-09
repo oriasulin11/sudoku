@@ -18,10 +18,15 @@ namespace Sudoku.SolvingUnit
     /// </summary>
     internal static class Solver
     {
+       
         public static void ApplyHeuristic(Board board)
         {
+           
             NakedSingels.LocateNakedSingels(board);
             HiddenSingel.SolveForHiddenSingles(board);
+            NakedSets.ApplyNakedSets(board);
+            
+            
         }
         public static bool Solve(Board board)
         {
@@ -30,7 +35,7 @@ namespace Sudoku.SolvingUnit
                 // Apply the heuristics
                 ApplyHeuristic(board);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Heuistic found an error with the given board
                 return false;
