@@ -36,6 +36,10 @@ I have used an xUnit testing project for unit testing.
 you will find that I have implemented both sanity and somke tests.
 As instracted I have used AAA testing pattern.
 
+## FYI
+My solver workes in the most afficent way when running on release mode insted of debug.
+also, if you use a laptop make sure its pluged in to a power source when running.
+
 **Good Luck, and happy code review**
  
  by Ori Asulin.
