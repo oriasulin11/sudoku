@@ -63,15 +63,15 @@ namespace Sudoku.SolvingUnit
         /// </summary>
         public static void UpdateBox(Board board, int row, int column, int value)
         {
-            int sqrtOfDimension = (int)Math.Sqrt(board.Dimensions);
+           
 
             //Calculate the first cell of the box in which the cell is in
-            int boxRow = (row / sqrtOfDimension) * sqrtOfDimension;
-            int boxColumn = (column / sqrtOfDimension) * sqrtOfDimension;
+            int boxRow = (row / board.BoxSize) * board.BoxSize;
+            int boxColumn = (column / board.BoxSize) * board.BoxSize;
 
             for (int index = 0; index < board.Dimensions; index++)
             {
-                Cell cell = board.GetCell(boxRow + index / sqrtOfDimension, boxColumn + index % sqrtOfDimension);
+                Cell cell = board.GetCell(boxRow + index / board.BoxSize, boxColumn + index % board.BoxSize);
                 if (cell.FinalValue == 0 && cell.PossibleValues.Contains(value))
                     cell.PossibleValues.Remove(value);
 

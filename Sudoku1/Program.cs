@@ -13,6 +13,10 @@ namespace Sudoku
     {
         private static Stopwatch stopWatch = new Stopwatch();
 
+        static void Main(string[] args)
+        {
+            Menu.ShowMenu();
+        }
         public static void SolveWithUsersInput(String usersInput)
         {
             stopWatch.Reset();
@@ -63,9 +67,6 @@ namespace Sudoku
                 }
             }
         }
-        static void Main(string[] args)
-        {
-            Menu.ShowMenu(); 
-        }
+       
     }
 }

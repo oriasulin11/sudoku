@@ -1,11 +1,7 @@
 ﻿using Sudoku.InputHandling;
 using Sudoku.SolvingUnit;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Sudoku.UI
 {
