@@ -47,8 +47,9 @@ namespace Sudoku.BoardManagement
                     }
                     stringIndex++;
                 }
-
             }
+            if(board.Dimensions == 9)
+                NakedSets.ApplyNakedSets(board);
         }
     }
 }

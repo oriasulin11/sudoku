@@ -1,12 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="TestData\EmptyBoards.txt" />
+    <None Remove="TestData\HardBoards.txt" />
+    <None Remove="TestData\IllegalCharsInSudoku.txt" />
+    <None Remove="TestData\InvalidBoardLength.txt" />
+    <None Remove="TestData\UnsolvableBoards.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestData\EmptyBoards.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\HardBoards.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\IllegalCharsInSudoku.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\InvalidBoardLength.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\UnsolvableBoards.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
@@ -22,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sudoku\Sudoku.csproj" />
+    <ProjectReference Include="..\Sudoku1\Sudoku.csproj" />
   </ItemGroup>
 
 </Project>
