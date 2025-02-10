@@ -7,12 +7,21 @@ using System.Threading.Tasks;
 
 namespace Sudoku.SolvingUnit
 {
+    /// <summary>
+    /// A naked set is a group of N cells which all 
+    /// have the same N number of possible values.
+    /// When found these possible values must be in one of
+    /// those cells which means we can remove them from other cells in this unit.
+    /// This heuristic is highly affecive on classic 9X9 boards when apllied once.
+    /// We wont apply it on higher dimention boards.
+    /// </summary>
     internal class NakedSets
     {
+        private const int MaxSetSize = 8;
         public static void ApplyNakedSets(Board board)
         {
             List<Cell> cellsInRow, cellsInCol, cellsInBox;
-            for (int setSize = 2; setSize <= 8; setSize++)
+            for (int setSize = 2; setSize <= MaxSetSize; setSize++)
             {
                 for (int position = 0; position < board.Dimensions; position++)
                 {

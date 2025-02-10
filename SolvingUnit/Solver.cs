@@ -18,7 +18,6 @@ namespace Sudoku.SolvingUnit
     /// </summary>
     internal static class Solver
     {
-        public static bool OnFirstRound { get; set; } = true;
         public static void ApplyHeuristic(Board board)
         {
             NakedSingels.LocateNakedSingels(board);
@@ -28,12 +27,7 @@ namespace Sudoku.SolvingUnit
                 ApplyHeuristic(board);
 
             }
-            //if (OnFirstRound)
-            //{
-            //    NakedSets.ApplyNakedSets(board);
-            //    OnFirstRound = false;
-            //}
-               
+
         }
         public static bool Solve(Board board)
         {
@@ -46,9 +40,9 @@ namespace Sudoku.SolvingUnit
             {
                 // Heuistic found an error with the given board
                 return false;
-                
+
             }
-           
+
 
             Cell cell = board.GetCellWithLeastProbabilities();
 
@@ -56,15 +50,18 @@ namespace Sudoku.SolvingUnit
             if (cell == null)
                 return true;
 
+
+
             // Found an unsolved cell with no possible candidates 
-            if (cell.PossibleValues.Count == 0)              
+            if (cell.PossibleValues.Count == 0)
                 return false;
 
-            
+
             foreach (var number in cell.PossibleValues.ToList())
             {
-
                 Board oldBoard = (Board)board.Clone();
+                
+                // "Guess" a value
                 cell.FinalValue = number;
                 cell.PossibleValues.Clear();
                 NeighborsUpdater.UpdateNeighbors(board, cell.Row, cell.Column, number);

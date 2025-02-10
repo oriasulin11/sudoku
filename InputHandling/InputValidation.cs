@@ -23,7 +23,7 @@ namespace Sudoku.InputHandling
         {
             int dimentions = ProcessInputFromConsole.GetSudokuDimentions(rawInput);
             // Dimention is NOT a perfect square
-            if (Math.Sqrt(rawInput.Length) != dimentions)
+            if (Math.Sqrt(rawInput.Length) != dimentions || Math.Sqrt(dimentions) % 1 != 0)
                 throw new InvalidSudokuLengthException($"Invalid input length");
         }
 

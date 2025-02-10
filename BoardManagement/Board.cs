@@ -45,7 +45,7 @@ namespace Sudoku.BoardManagement
             }
             return cells;
         }
-        //Returns a the set from a specified cell
+        
         public Cell GetCell(int row, int col) => _board[row, col];
 
         public Cell GetCellInUnit(UnitType unitType, int unitIndex, int positionInUnit)
@@ -72,7 +72,7 @@ namespace Sudoku.BoardManagement
         /// </summary>
         public Cell GetCellWithLeastProbabilities()
         {
-            int minRank =0, currentRank;
+            int minRank =3 * Dimensions, currentRank;
             List<Cell> cells = FindCellsWithLeastProbabilities();
             Cell minRankCell;
             // Cant find an unsolved cell
@@ -93,16 +93,18 @@ namespace Sudoku.BoardManagement
             return minRankCell;
 
         }
+        // returns the number of solved cells in a given cell's house
         private int SolvedCellInHouse(Cell cell)
         {
             int boxIndex = (cell.Row / BoxSize) * BoxSize + (cell.Column / BoxSize);
 
-            int solvedCellsInRow = GetCellsInUnit(UnitType.Row, cell.Row).Where(c => c.FinalValue!= 0).Count();
+            int solvedCellsInRow = GetCellsInUnit(UnitType.Row, cell.Row).Where(c => c.FinalValue != 0).Count();
             int solvedCellsInCol = GetCellsInUnit(UnitType.Column, cell.Column).Where(c => c.FinalValue != 0).Count();
             int solvedCellsInBox = GetCellsInUnit(UnitType.Box, boxIndex).Where(c => c.FinalValue != 0).Count();
             
             return solvedCellsInRow + solvedCellsInCol + solvedCellsInBox;
         }
+        // Findes the cells in the board which has the least amount of possible values
         private List<Cell> FindCellsWithLeastProbabilities()
         {
             List<Cell> minCells = new List<Cell>();
@@ -129,9 +131,7 @@ namespace Sudoku.BoardManagement
             }
             return minCells;
         }
-        /// <summary>
-        /// This function creates a deep clone of the board
-        /// </summary>
+        // This function creates a deep clone of the board
         public Object Clone()
         {
             Board newBoard = new Board(Dimensions);

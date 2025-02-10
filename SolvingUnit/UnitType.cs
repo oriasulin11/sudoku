@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sudoku.SolvingUnit
 {
+    // Enum for the diffrent types of units
     public enum UnitType
     {
         Row,

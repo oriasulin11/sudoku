@@ -25,13 +25,22 @@ namespace Sudoku.UI
             //Take input from console
             if (usersChoise.Equals("1"))
             {
-                Console.WriteLine("Enter Sudoku");
-                string sudokuBoard = ProcessInputFromConsole.TakeInputFromUser();
-                Program.SolveWithUsersInput(sudokuBoard);
-               
+                try
+                {
+                    Console.WriteLine("Enter Sudoku");
+                    string sudokuBoard = ProcessInputFromConsole.TakeInputFromUser();
+                    Program.SolveWithUsersInput(sudokuBoard);
+
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message.ToString());
+                }
+                
             }
             // Take input from file
-            if(usersChoise.Equals("2"))
+            else if(usersChoise.Equals("2"))
             {
                 try
                 {
@@ -42,14 +51,16 @@ namespace Sudoku.UI
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Message.ToString());
                     ShowMenu();
                 }
             }
-            if (usersChoise.Equals("3"))
+            // Exit
+            else if (usersChoise.Equals("3"))
                 return;
             // Invalid input
-            Console.WriteLine("Invalid input try again...");
+            else
+                Console.WriteLine("Invalid input try again...");
             ShowMenu();
         }
         
