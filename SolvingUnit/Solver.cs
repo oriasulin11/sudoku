@@ -13,20 +13,27 @@ namespace Sudoku.SolvingUnit
     /// this is algorithem uses recursive backtracking
     /// to solve the sudoku by "guessing" a number and when
     /// incountering a problem, we backtrack and try a diffrent one.
-    /// Additionaly the algorithem use various heuristics to chop down
+    /// Additionaly the algorithem use various heuristics to "chop down
     /// the recursion tree, and gurentee short solving time.
     /// </summary>
     internal static class Solver
     {
-       
+        public static bool OnFirstRound { get; set; } = true;
         public static void ApplyHeuristic(Board board)
         {
-           
             NakedSingels.LocateNakedSingels(board);
-            HiddenSingel.SolveForHiddenSingles(board);
-            NakedSets.ApplyNakedSets(board);
-            
-            
+            if (HiddenSingel.SolveForHiddenSingles(board))
+            {
+                HiddenSingel.MadeProgress = false;
+                ApplyHeuristic(board);
+
+            }
+            //if (OnFirstRound)
+            //{
+            //    NakedSets.ApplyNakedSets(board);
+            //    OnFirstRound = false;
+            //}
+               
         }
         public static bool Solve(Board board)
         {

@@ -3,7 +3,7 @@ using Sudoku.SolvingUnit;
 using Sudoku.UI;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace Sudoku.BoardManagement 
 {
@@ -65,14 +65,48 @@ namespace Sudoku.BoardManagement
             }
         }
         /// <summary>
-        /// This function iterates over each cell in the board,
-        /// and returns the cell with the least amount of possible
-        /// values
+        /// we will define the cell with least probabilites as
+        /// the cell with the minimum rank out of the cells with
+        /// the least possible values (the least amount of candidates).
+        /// the rank of the cell is the amount of solved cells in its house 
         /// </summary>
         public Cell GetCellWithLeastProbabilities()
         {
-            Cell minCell = null;
-            int minCount = Dimensions+1;// The max number of possible values
+            int minRank =0, currentRank;
+            List<Cell> cells = FindCellsWithLeastProbabilities();
+            Cell minRankCell;
+            // Cant find an unsolved cell
+            if (cells.Count == 0)
+            {
+                return null;
+            }
+            minRankCell = cells.First();
+            foreach (var cell in cells)
+            {
+                currentRank = SolvedCellInHouse(cell);
+                if (currentRank < minRank)
+                {
+                    minRank = currentRank;
+                    minRankCell = cell;
+                }
+            }
+            return minRankCell;
+
+        }
+        private int SolvedCellInHouse(Cell cell)
+        {
+            int boxIndex = (cell.Row / BoxSize) * BoxSize + (cell.Column / BoxSize);
+
+            int solvedCellsInRow = GetCellsInUnit(UnitType.Row, cell.Row).Where(c => c.FinalValue!= 0).Count();
+            int solvedCellsInCol = GetCellsInUnit(UnitType.Column, cell.Column).Where(c => c.FinalValue != 0).Count();
+            int solvedCellsInBox = GetCellsInUnit(UnitType.Box, boxIndex).Where(c => c.FinalValue != 0).Count();
+            
+            return solvedCellsInRow + solvedCellsInCol + solvedCellsInBox;
+        }
+        private List<Cell> FindCellsWithLeastProbabilities()
+        {
+            List<Cell> minCells = new List<Cell>();
+            int minCount = Dimensions + 1;// The max number of possible values
             Cell currentCell;
             for (int rows = 0; rows < Dimensions; rows++)
             {
@@ -81,14 +115,19 @@ namespace Sudoku.BoardManagement
                 {
                     currentCell = GetCell(rows, columns);
                     // Check for unsoled cells
-                    if(currentCell.FinalValue == 0 && currentCell.PossibleValues.Count < minCount)
+                    if (currentCell.FinalValue == 0 && currentCell.PossibleValues.Count < minCount)
                     {
-                        minCell = GetCell(rows, columns);
-                        minCount= minCell.PossibleValues.Count;
+                        minCells.Clear();
+                        minCells.Add(currentCell);
+                        minCount = currentCell.PossibleValues.Count;
+                    }
+                    else if(currentCell.FinalValue == 0 && currentCell.PossibleValues.Count == minCount)
+                    {
+                        minCells.Add(currentCell);
                     }
                 }
             }
-            return minCell;
+            return minCells;
         }
         /// <summary>
         /// This function creates a deep clone of the board
@@ -144,7 +183,7 @@ namespace Sudoku.BoardManagement
             {
                 for (int columns = 0; columns < Dimensions; columns++)
                 {
-                    output += GetCell(rows, columns).FinalValue;
+                    output += Convert.ToChar(GetCell(rows, columns).FinalValue + '0');
                 }
             }
             return output;

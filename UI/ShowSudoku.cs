@@ -1,48 +1,43 @@
 ﻿using Sudoku.BoardManagement;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sudoku.UI
 {
-    /// <summary>
-    /// This class will print out the
-    /// (hopefuly) solved sudoku board
-    /// </summary>
     internal class ShowSudoku
     {
-       
         public static void PrintSudoku(Board board)
         {
-            int value;
-            for (int row = 0; row < board.Dimensions; row++)
+            int size = board.Dimensions;
+            int boxSize = board.BoxSize;
+            int cellWidth = (size > 9) ? 3 : 2; // Adjust width for double-digit numbers
+            int innerWidth = (cellWidth * size) + (boxSize * 3) - 1 + size; // Dynamic separator width
+
+            string horizontalBorder = "+" + new string('-', innerWidth) + "+";
+
+            Console.WriteLine(horizontalBorder); // Top border
+
+            for (int row = 0; row < size; row++)
             {
-                // Prints Box horizontal outline
-                if (row % board.BoxSize == 0)
-                    Console.WriteLine(new String('-', board.Dimensions * 2+ board.BoxSize * 2  -1));
+                if (row % boxSize == 0 && row != 0)
+                    Console.WriteLine("|" + new string('-', innerWidth) + "|");
 
-                for (int column = 0; column < board.Dimensions; column++)
+                Console.Write("|"); // Left border
+
+                for (int col = 0; col < size; col++)
                 {
-                    // Print box vertical outline 
-                    if (column % board.BoxSize == 0)
+                    if (col % boxSize == 0)
                         Console.Write(" | ");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    value = board.GetCell(row, column).FinalValue;
-                    // Print extra whitespace for single digit numbers
-                    if (value < 10)
-                    {
-                        Console.Write($"{board.GetCell(row, column).FinalValue}  ");
-                    }
-                    else
-                        Console.Write($"{board.GetCell(row, column).FinalValue} ");
 
+                    int value = board.GetCell(row, col).FinalValue;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(value.ToString().PadLeft(cellWidth) + " ");
                     Console.ResetColor();
                 }
-                //Move down for a new row
-                Console.WriteLine();
+
+                Console.WriteLine("|"); // Right border
             }
+
+            Console.WriteLine(horizontalBorder); // Bottom border
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Sudoku.SolvingUnit
     internal class HiddenSingel
     {
 
-       
+        public static bool MadeProgress { get; set; } = false ;
         /// <summary>
         /// This is a generic function to check for hidden
         /// singles in a unit (row, col or box).
@@ -86,9 +86,10 @@ namespace Sudoku.SolvingUnit
         return singles;
     }
 
-    public static void SolveForHiddenSingles(Board board)
+    public static bool SolveForHiddenSingles(Board board)
     {
         bool foundHidden = false;
+
         ISet<int> hiddenSinglesInRow = new HashSet<int>()
             , hiddenSinglesInCol = new HashSet<int>(),
             hiddenSingleInBox = new HashSet<int>(); ;
@@ -124,13 +125,18 @@ namespace Sudoku.SolvingUnit
         }
         // When found hidden singles look for them, again
         if (foundHidden)
+        {
+            MadeProgress= true;
             SolveForHiddenSingles(board);
+        }
+        return MadeProgress;
+            
     }
 
 
 
 
-    }
+}
     
 }
 

@@ -36,6 +36,7 @@ namespace Sudoku
                 }
                 // Show sudoku to console
                 ShowSudoku.PrintSudoku(board);
+                Solver.OnFirstRound = true;
             }
             else
             {

@@ -12,8 +12,7 @@ namespace Sudoku.SolvingUnit
         public static void ApplyNakedSets(Board board)
         {
             List<Cell> cellsInRow, cellsInCol, cellsInBox;
-            int maxSetSize;
-            for (int setSize = 0; setSize < 9; setSize++)
+            for (int setSize = 2; setSize <= 8; setSize++)
             {
                 for (int position = 0; position < board.Dimensions; position++)
                 {
