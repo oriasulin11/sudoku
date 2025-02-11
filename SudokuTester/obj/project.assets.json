@@ -6138,8 +6138,8 @@
     },
     "Sudoku/1.0.0": {
       "type": "project",
-      "path": "../Sudoku1/Sudoku.csproj",
-      "msbuildProject": "../Sudoku1/Sudoku.csproj"
+      "path": "../Sudoku/Sudoku.csproj",
+      "msbuildProject": "../Sudoku/Sudoku.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6183,8 +6183,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\User\\source\\repos\\Sudoku\\Sudoku1\\Sudoku.csproj": {
-              "projectPath": "C:\\Users\\User\\source\\repos\\Sudoku\\Sudoku1\\Sudoku.csproj"
+            "C:\\Users\\User\\source\\repos\\Sudoku\\Sudoku\\Sudoku.csproj": {
+              "projectPath": "C:\\Users\\User\\source\\repos\\Sudoku\\Sudoku\\Sudoku.csproj"
             }
           }
         }

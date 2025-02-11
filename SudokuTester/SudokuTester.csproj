@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sudoku1\Sudoku.csproj" />
+    <ProjectReference Include="..\Sudoku\Sudoku.csproj" />
   </ItemGroup>
 
 </Project>
