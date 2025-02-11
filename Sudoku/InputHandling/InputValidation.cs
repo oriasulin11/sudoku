@@ -10,7 +10,6 @@ namespace Sudoku.InputHandling
         ///Note that this class dosen't determine if a suduko
         ///is solvable or not.
         /// </summary>
-        /// <param name="rawInput"></param>
         public static void ValidateInput(string rawInput)
         {
             int dimentions = ProcessInputFromConsole.GetSudokuDimentions(rawInput);

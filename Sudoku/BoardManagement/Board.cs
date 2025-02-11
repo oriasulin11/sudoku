@@ -1,6 +1,4 @@
-﻿
-using Sudoku.SolvingUnit;
-using Sudoku.UI;
+﻿using Sudoku.SolvingUnit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +9,7 @@ namespace Sudoku.BoardManagement
     /// The sudoku board will be represented as a matrix
     /// of hash sets. Each set will include the values
     /// which can fit in the cell.
-    /// The board size may vary according to the _dimensions field.
+    /// The board size may vary according to the Dimensions field.
     /// A classic sudoku board is 9X9.
     /// </summary>
     public class Board : ICloneable

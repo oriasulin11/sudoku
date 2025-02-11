@@ -1,14 +1,7 @@
 ﻿using Sudoku.BoardManagement;
-using Sudoku.Exceptions;
-using Sudoku.UI;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Dynamic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sudoku.SolvingUnit
 {
@@ -27,9 +20,6 @@ namespace Sudoku.SolvingUnit
         /// This is a generic function to check for hidden
         /// singles in a unit (row, col or box).
         /// </summary>
-        /// <param name="board"></param>
-        /// <param name="index"></param>
-        /// <param name="unitType"></param>
         /// <returns></returns>
         public static ISet<int> CheckForHiddenSinglesInUnit(Board board, int unitIndex, UnitType unitType)
         {

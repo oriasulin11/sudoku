@@ -21,6 +21,7 @@ namespace Sudoku.SolvingUnit
         public static void ApplyHeuristic(Board board)
         {
             NakedSingels.LocateNakedSingels(board);
+            // When hidden single made progress we would like to call the other heuristcs again
             if (HiddenSingel.SolveForHiddenSingles(board))
             {
                 HiddenSingel.MadeProgress = false;
@@ -42,7 +43,6 @@ namespace Sudoku.SolvingUnit
                 return false;
 
             }
-
 
             Cell cell = board.GetCellWithLeastProbabilities();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Exceptions
 {
-    internal class IllegalCharactersException : Exception
+    public class IllegalCharactersException : Exception
     {
         public IllegalCharactersException(string message)
             :base(message) { }

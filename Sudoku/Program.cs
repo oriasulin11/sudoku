@@ -13,6 +13,10 @@ namespace Sudoku
     {
         private static Stopwatch stopWatch = new Stopwatch();
 
+        static void Main(string[] args)
+        {
+            Menu.ShowMenu();
+        }
         public static void SolveWithUsersInput(String usersInput)
         {
             stopWatch.Reset();
@@ -23,10 +27,6 @@ namespace Sudoku
             // Init board according to users input
             Board board = new Board(ProcessInputFromConsole.GetSudokuDimentions(usersInput));
             BoardSetUp.InitilaizeBoard(board, usersInput);
-            // Apply naked sets heuristic once
-            if(board.Dimensions == 9)
-                NakedSets.ApplyNakedSets(board);
-            
             if (Solver.Solve(board))
             {
                 stopWatch.Stop();
@@ -67,9 +67,6 @@ namespace Sudoku
                 }
             }
         }
-        static void Main(string[] args)
-        {
-            Menu.ShowMenu(); 
-        }
+       
     }
 }

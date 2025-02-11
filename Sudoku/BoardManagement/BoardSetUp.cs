@@ -1,9 +1,4 @@
 ﻿using Sudoku.SolvingUnit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sudoku.BoardManagement
 {
@@ -21,9 +16,8 @@ namespace Sudoku.BoardManagement
         /// When placing a number in a cell, this number
         /// can't show up in the the same row culumn or box.
         /// therefore an update to the nehiboring cells is requierd
+        /// For 9x9 boards we will apply the naked sets heuristc
         /// </summary>
-        /// <param name="board"></param>
-        /// <param name="sudokuString"></param>
         public static void InitilaizeBoard(Board board, string sudokuString)
         {
             int stringIndex = 0, number;
@@ -47,8 +41,9 @@ namespace Sudoku.BoardManagement
                     }
                     stringIndex++;
                 }
-
             }
+            if(board.Dimensions == 9)
+                NakedSets.ApplyNakedSets(board);
         }
     }
 }

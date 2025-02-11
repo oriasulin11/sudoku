@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Exceptions
 {
-    internal class InvalidSudokuLengthException : Exception
+    public class InvalidSudokuLengthException : Exception
     {
 
         public InvalidSudokuLengthException(string message)
